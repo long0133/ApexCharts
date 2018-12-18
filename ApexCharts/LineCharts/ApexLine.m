@@ -14,7 +14,6 @@
 
 @interface ApexLine ()
 @property (nonatomic, strong) CAShapeLayer *line; /**<  */
-@property (nonatomic, strong) NSArray<ApexDot*> *dots; /**<  */
 @property (nonatomic, assign) CGFloat xDelta; /**<  */
 @property (nonatomic, assign) CGFloat yDelta; /**<  */
 @property (nonatomic, assign) CGFloat yScale; /**<  */
@@ -29,19 +28,20 @@
     line.xDelta = xDelta;
     line.yDelta = yDelta;
     line.yScale = yScale;
-    [line prepareDots:points];
-    [line drawLine];
+    [line drawLine:points];
     [superLayer addSublayer:line];
     return line;
 }
 
-- (void)prepareDots:(NSArray<ApexPoint*>*)points{
+- (void)drawLine:(NSArray<ApexPoint*>*)points{
     NSMutableArray *temp = [NSMutableArray array];
     UIBezierPath *path = [UIBezierPath bezierPath];
     
     [points enumerateObjectsUsingBlock:^(ApexPoint * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        CGFloat x = (idx + 1) * self.xDelta;
+        //数据中的点转化为视图中的点
+        CGFloat x = (idx) * self.xDelta;
         CGFloat y = (self.height - ((obj.y) * self.yScale));
+    
         CGFloat originX = obj.x;
         CGFloat originY = obj.y;
         
@@ -61,18 +61,37 @@
         [temp addObject:dot];
     }];
     
-    self.dots = [temp copy];
+    _dots = [temp copy];
     self.line.path = path.CGPath;
     [self addSublayer:self.line];
-}
-
-- (void)drawLine{
+    
     [self.dots enumerateObjectsUsingBlock:^(ApexDot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addSublayer:obj.layer];
     }];
 }
 
 #pragma mark - getter
+- (void)setShouldShowYValue:(BOOL)shouldShowYValue{
+    _shouldShowYValue = shouldShowYValue;
+    
+    [self.dots enumerateObjectsUsingBlock:^(ApexDot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.shouldShowYValue = shouldShowYValue;
+    }];
+}
+
+- (void)setDotColor:(UIColor *)dotColor{
+    _dotColor = dotColor;
+    [self.dots enumerateObjectsUsingBlock:^(ApexDot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.dotColor = dotColor;
+    }];
+}
+
+- (void)setLineColor:(UIColor *)lineColor{
+    _lineColor = lineColor;
+    self.line.strokeColor = lineColor.CGColor;
+    [self setNeedsDisplay];
+}
+
 - (CAShapeLayer *)line {
     if (!_line) {
         _line = [[CAShapeLayer alloc] init];

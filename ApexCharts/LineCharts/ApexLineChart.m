@@ -11,6 +11,7 @@
 #import "CALayer+TKFrame.h"
 #import "ApexPoint.h"
 #import "ApexLine.h"
+#import "ApexDot.h"
 
 #define axisLineWidth 2
 #define axisColor [UIColor grayColor]
@@ -28,16 +29,19 @@
 @property (nonatomic, assign) CGFloat yScale; /**<  */
 @property (nonatomic, assign) CGFloat maxX; /**<  */
 @property (nonatomic, assign) CGFloat maxY; /**<  */
-@property (nonatomic, strong) NSMutableArray *xDotArr; /**<  */
+@property (nonatomic, strong) NSMutableArray *xDotArr; /**< 数据原始x值的数组 */
+@property (nonatomic, strong) NSMutableArray<NSValue*> *xAxisPointsArr; /**< x坐标轴上点的集合 */
+@property (nonatomic, strong) ApexLine *anyLine; /**<  */
 @end
 
 @implementation ApexLineChart
 
-+ (void)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas{
++ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas{
     
     ApexLineChart *lineChart = [[ApexLineChart alloc] initWithFrame:view.bounds];
     [lineChart prepareDatas:datas];
     [view addSubview:lineChart];
+    return lineChart;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -98,12 +102,13 @@
 - (void)drawXDots{
     CGFloat interval = self.canvasLayer.right / (self.xDotCount + 1);
     _xDelta = interval;
-    for (NSInteger i = 1; i <= self.xDotCount; i++) {
+    for (NSInteger i = 0; i < self.xDotCount; i++) {
         CAShapeLayer *xDot = [[CAShapeLayer alloc] init];
         xDot.strokeColor = axisColor.CGColor;
         xDot.lineWidth = axisLineWidth;
         
         CGPoint p = CGPointMake(i * interval, self.canvasLayer.bottom);
+        [self.xAxisPointsArr addObject:[NSValue valueWithCGPoint:p]];
         
         UIBezierPath *dotPath = [UIBezierPath bezierPath];
         [dotPath moveToPoint:p];
@@ -134,21 +139,84 @@
 }
 
 - (void)drawXtag{
-    for (NSInteger i = 1; i <= self.xDotCount; i++) {
+    for (NSInteger i = 0; i < self.xDotCount; i++) {
         UILabel *tagL = [[UILabel alloc] init];
         tagL.frame = CGRectMake(i * _xDelta + 15, self.canvasLayer.bottom + 5, 15, 20);
         tagL.font = [UIFont systemFontOfSize:11];
         tagL.textColor = [UIColor blackColor];
-        NSNumber *xNumber = self.xDotArr[i - 1];
+        NSNumber *xNumber = self.xDotArr[i];
         tagL.text = [NSString stringWithFormat:@"%ld",xNumber.integerValue];
         [self addSubview:tagL];
     }
 }
 
 - (void)drawLine{
-    for (NSString *key in self.lines) {
-        [ApexLine apexLineWithPoints:self.lines[key] onLayer:self.canvasLayer xDelta:_xDelta yDelta:_yDelta yScale:_yScale];
+    @try {
+        NSInteger i = 0;
+        
+        for (NSString *key in self.lines) {
+            
+            ApexLine *line = [ApexLine apexLineWithPoints:self.lines[key] onLayer:self.canvasLayer xDelta:_xDelta yDelta:_yDelta yScale:_yScale];
+            
+            if (line.dots.count > 20) {
+                line.shouldShowYValue = false;
+            }
+            
+            if (!_anyLine || _anyLine.dots.count < line.dots.count) {
+                _anyLine = line;
+            }
+            
+            if (i < self.lineColorArr.count && i < self.dotColorArr.count) {
+                line.lineColor = self.lineColorArr[i];
+                line.dotColor = self.dotColorArr[i];
+            }
+            
+            i ++;
+        }
+    } @catch (NSException *exception) {
     }
+}
+
+- (void)setShowXindicatorDashLine:(BOOL)showXindicatorDashLine{
+    _showXindicatorDashLine = showXindicatorDashLine;
+    
+    if (showXindicatorDashLine) {
+        @try {
+            
+            [_anyLine.dots enumerateObjectsUsingBlock:^(ApexDot * _Nonnull dot, NSUInteger idx, BOOL * _Nonnull stop) {
+                CGPoint xPoint = self.xAxisPointsArr[idx].CGPointValue;
+                
+                CAShapeLayer *dashLineLayer = [[CAShapeLayer alloc] init];
+                dashLineLayer.lineWidth = 2;
+                dashLineLayer.fillColor = [UIColor grayColor].CGColor;
+                dashLineLayer.strokeColor = [UIColor grayColor].CGColor;
+                dashLineLayer.lineDashPattern = @[@(3),@(5)];
+                
+                UIBezierPath *path = [UIBezierPath bezierPath];
+                [path moveToPoint:xPoint];
+                [path addLineToPoint:dot.dotCenter];
+                
+                dashLineLayer.path = path.CGPath;
+                [self.canvasLayer addSublayer:dashLineLayer];
+            }];
+            
+        } @catch (NSException *exception) {
+            
+        }
+    }
+}
+
+#pragma mark - setter
+- (void)setLineColorArr:(NSArray *)lineColorArr{
+    _lineColorArr = lineColorArr;
+    
+    [self drawLine];
+}
+
+- (void)setDotColorArr:(NSArray *)dotColorArr{
+    _dotColorArr = dotColorArr;
+    
+    [self drawLine];
 }
 
 #pragma mark - getter
@@ -218,5 +286,12 @@
         _lines = [NSMutableDictionary dictionary];
     }
     return _lines;
+}
+
+- (NSMutableArray<NSValue *> *)xAxisPointsArr{
+    if (!_xAxisPointsArr) {
+        _xAxisPointsArr = [NSMutableArray array];
+    }
+    return _xAxisPointsArr;
 }
 @end

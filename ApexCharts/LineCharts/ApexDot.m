@@ -32,14 +32,15 @@
 }
 
 - (void)prepareDot:(ApexPoint*)point{
-
-    _dotCenter = CGPointMake(point.x, point.y);
-    _x = _dotCenter.x - Kwidth / 2.0;
-    _y = _dotCenter.y;
+    
+    CGPoint p = CGPointMake(point.x, point.y);
+    _x = p.x - Kwidth / 2.0;
+    _y = p.y;
     self.frame = CGRectMake(_x, _y - Kheight, Kwidth, Kheight);
     self.layer.anchorPoint = CGPointMake(0.5, 1);
     
     CGFloat dotWidth = self.width/dotScale;
+    _dotCenter = CGPointMake(self.center.x, self.bottom + dotWidth/2.0);
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.width/2.0 - dotWidth/2.0, self.height - dotWidth/2.0, dotWidth, dotWidth)];
     self.dotLayer.path = path.CGPath;
     [self.layer addSublayer:self.dotLayer];
@@ -52,6 +53,26 @@
 - (void)setYValue:(NSString *)yValue{
     self.yLabel.text = yValue;
 }
+
+- (void)setShouldShowYValue:(BOOL)shouldShowYValue{
+    _shouldShowYValue = shouldShowYValue;
+    
+    if (shouldShowYValue) {
+        self.yLabel.hidden = NO;
+    }else{
+        self.yLabel.hidden = YES;
+    }
+}
+
+- (void)setDotColor:(UIColor *)dotColor{
+    _dotColor = dotColor;
+    self.dotLayer.fillColor = dotColor.CGColor;
+    self.dotLayer.strokeColor = dotColor.CGColor;
+    self.yLabel.textColor = dotColor;
+    
+    [self setNeedsDisplay];
+}
+
 #pragma mark - getter
 - (CAShapeLayer *)dotLayer{
     if (!_dotLayer) {

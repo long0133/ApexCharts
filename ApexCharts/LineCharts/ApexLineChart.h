@@ -11,7 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ApexLineChart : UIView
-+ (void)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas;
+//颜色配置
+@property (nonatomic, strong) NSArray *lineColorArr; /**<  */
+@property (nonatomic, strong) NSArray *dotColorArr; /**<  */
+
+@property (nonatomic, assign) BOOL showXindicatorDashLine; /**<  */
+
++ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas;
 @end
 
 NS_ASSUME_NONNULL_END
