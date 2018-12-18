@@ -13,6 +13,13 @@
 		E767E38B21C3914E00FE3428 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E767E38A21C3914E00FE3428 /* Assets.xcassets */; };
 		E767E38E21C3914E00FE3428 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E767E38C21C3914E00FE3428 /* LaunchScreen.storyboard */; };
 		E767E39121C3914E00FE3428 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E39021C3914E00FE3428 /* main.m */; };
+		E767E39A21C3918300FE3428 /* ApexLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E39921C3918300FE3428 /* ApexLineChart.m */; };
+		E767E39E21C39D9400FE3428 /* UIView+TKFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E39C21C39D9400FE3428 /* UIView+TKFrame.m */; };
+		E767E3A121C3B4D500FE3428 /* CALayer+TKFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A021C3B4D500FE3428 /* CALayer+TKFrame.m */; };
+		E767E3A421C739EA00FE3428 /* ApexPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A321C739EA00FE3428 /* ApexPoint.m */; };
+		E767E3A721C7440C00FE3428 /* ApexDot.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A621C7440C00FE3428 /* ApexDot.m */; };
+		E767E3AA21C7460D00FE3428 /* ApexLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A921C7460D00FE3428 /* ApexLine.m */; };
+		E767E3AD21C89BC500FE3428 /* UIColor+ChartColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3AC21C89BC500FE3428 /* UIColor+ChartColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,20 @@
 		E767E38D21C3914E00FE3428 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E767E38F21C3914E00FE3428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E767E39021C3914E00FE3428 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E767E39821C3918300FE3428 /* ApexLineChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexLineChart.h; sourceTree = "<group>"; };
+		E767E39921C3918300FE3428 /* ApexLineChart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexLineChart.m; sourceTree = "<group>"; };
+		E767E39C21C39D9400FE3428 /* UIView+TKFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKFrame.m"; sourceTree = "<group>"; };
+		E767E39D21C39D9400FE3428 /* UIView+TKFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TKFrame.h"; sourceTree = "<group>"; };
+		E767E39F21C3B4D500FE3428 /* CALayer+TKFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+TKFrame.h"; sourceTree = "<group>"; };
+		E767E3A021C3B4D500FE3428 /* CALayer+TKFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+TKFrame.m"; sourceTree = "<group>"; };
+		E767E3A221C739EA00FE3428 /* ApexPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexPoint.h; sourceTree = "<group>"; };
+		E767E3A321C739EA00FE3428 /* ApexPoint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexPoint.m; sourceTree = "<group>"; };
+		E767E3A521C7440C00FE3428 /* ApexDot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexDot.h; sourceTree = "<group>"; };
+		E767E3A621C7440C00FE3428 /* ApexDot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexDot.m; sourceTree = "<group>"; };
+		E767E3A821C7460D00FE3428 /* ApexLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexLine.h; sourceTree = "<group>"; };
+		E767E3A921C7460D00FE3428 /* ApexLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexLine.m; sourceTree = "<group>"; };
+		E767E3AB21C89BC500FE3428 /* UIColor+ChartColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ChartColor.h"; sourceTree = "<group>"; };
+		E767E3AC21C89BC500FE3428 /* UIColor+ChartColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ChartColor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +79,8 @@
 		E767E38021C3914D00FE3428 /* ApexCharts */ = {
 			isa = PBXGroup;
 			children = (
+				E767E39B21C39D6300FE3428 /* Util */,
+				E767E39721C3915600FE3428 /* LineCharts */,
 				E767E38121C3914D00FE3428 /* AppDelegate.h */,
 				E767E38221C3914D00FE3428 /* AppDelegate.m */,
 				E767E38421C3914D00FE3428 /* ViewController.h */,
@@ -69,6 +92,34 @@
 				E767E39021C3914E00FE3428 /* main.m */,
 			);
 			path = ApexCharts;
+			sourceTree = "<group>";
+		};
+		E767E39721C3915600FE3428 /* LineCharts */ = {
+			isa = PBXGroup;
+			children = (
+				E767E39821C3918300FE3428 /* ApexLineChart.h */,
+				E767E39921C3918300FE3428 /* ApexLineChart.m */,
+				E767E3A221C739EA00FE3428 /* ApexPoint.h */,
+				E767E3A321C739EA00FE3428 /* ApexPoint.m */,
+				E767E3A521C7440C00FE3428 /* ApexDot.h */,
+				E767E3A621C7440C00FE3428 /* ApexDot.m */,
+				E767E3A821C7460D00FE3428 /* ApexLine.h */,
+				E767E3A921C7460D00FE3428 /* ApexLine.m */,
+			);
+			path = LineCharts;
+			sourceTree = "<group>";
+		};
+		E767E39B21C39D6300FE3428 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E767E39D21C39D9400FE3428 /* UIView+TKFrame.h */,
+				E767E39C21C39D9400FE3428 /* UIView+TKFrame.m */,
+				E767E39F21C3B4D500FE3428 /* CALayer+TKFrame.h */,
+				E767E3A021C3B4D500FE3428 /* CALayer+TKFrame.m */,
+				E767E3AB21C89BC500FE3428 /* UIColor+ChartColor.h */,
+				E767E3AC21C89BC500FE3428 /* UIColor+ChartColor.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,8 +192,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E767E3AD21C89BC500FE3428 /* UIColor+ChartColor.m in Sources */,
 				E767E38621C3914D00FE3428 /* ViewController.m in Sources */,
+				E767E3A721C7440C00FE3428 /* ApexDot.m in Sources */,
+				E767E3AA21C7460D00FE3428 /* ApexLine.m in Sources */,
 				E767E39121C3914E00FE3428 /* main.m in Sources */,
+				E767E3A421C739EA00FE3428 /* ApexPoint.m in Sources */,
+				E767E3A121C3B4D500FE3428 /* CALayer+TKFrame.m in Sources */,
+				E767E39A21C3918300FE3428 /* ApexLineChart.m in Sources */,
+				E767E39E21C39D9400FE3428 /* UIView+TKFrame.m in Sources */,
 				E767E38321C3914D00FE3428 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
