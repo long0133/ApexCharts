@@ -10,6 +10,7 @@
 #import "ApexPoint.h"
 #import "ApexDot.h"
 #import "CALayer+TKFrame.h"
+#import "UIView+TKFrame.h"
 #import "UIColor+ChartColor.h"
 
 @interface ApexLine ()
@@ -22,14 +23,14 @@
 
 @implementation ApexLine
 
-+ (instancetype)apexLineWithPoints:(NSArray<ApexPoint *> *)points onLayer:(CALayer *)superLayer xDelta:(CGFloat)xDelta yDelta:(CGFloat)yDelta yScale:(CGFloat)yScale{
++ (instancetype)apexLineWithPoints:(NSArray<ApexPoint *> *)points onLayer:(UIView *)superView xDelta:(CGFloat)xDelta yDelta:(CGFloat)yDelta yScale:(CGFloat)yScale{
     ApexLine *line = [[ApexLine alloc] init];
-    line.frame = superLayer.bounds;
+    line.frame = superView.bounds;
     line.xDelta = xDelta;
     line.yDelta = yDelta;
     line.yScale = yScale;
     [line drawLine:points];
-    [superLayer addSublayer:line];
+    [superView addSubview:line];
     return line;
 }
 
@@ -63,10 +64,10 @@
     
     _dots = [temp copy];
     self.line.path = path.CGPath;
-    [self addSublayer:self.line];
+    [self.layer addSublayer:self.line];
     
     [self.dots enumerateObjectsUsingBlock:^(ApexDot * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addSublayer:obj.layer];
+        [self addSubview:obj];
     }];
 }
 

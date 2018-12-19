@@ -19,7 +19,7 @@
 
 @interface ApexLineChart ()
 @property (nonatomic, strong) NSMutableDictionary<NSString*, NSArray<ApexPoint*>*> *lines; /**<  */
-@property (nonatomic, strong) CALayer *canvasLayer; /**<  */
+@property (nonatomic, strong) UIView *canvas; /**<  */
 @property (nonatomic, strong) CAShapeLayer *x; /**<  */
 @property (nonatomic, strong) CAShapeLayer *y; /**<  */
 @property (nonatomic, assign) NSInteger xDotCount; /**<  */
@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray *xDotArr; /**< 数据原始x值的数组 */
 @property (nonatomic, strong) NSMutableArray<NSValue*> *xAxisPointsArr; /**< x坐标轴上点的集合 */
 @property (nonatomic, strong) ApexLine *anyLine; /**<  */
+@property (nonatomic, strong) NSMutableArray<ApexLine*> *linesArr; /**<  */
 @end
 
 @implementation ApexLineChart
@@ -52,26 +53,26 @@
 }
 
 - (void)setUp{
-    [self.layer addSublayer:self.canvasLayer];
+    [self addSubview:self.canvas];
     [self drawXAxis];
     [self drawYAxis];
 }
 
 - (void)drawXAxis{
     UIBezierPath *xAxis = [[UIBezierPath alloc] init];
-    [xAxis moveToPoint:CGPointMake(0, self.canvasLayer.bottom)];
-    [xAxis addLineToPoint:CGPointMake(self.canvasLayer.width, self.canvasLayer.bottom)];
+    [xAxis moveToPoint:CGPointMake(0, self.canvas.bottom)];
+    [xAxis addLineToPoint:CGPointMake(self.canvas.width, self.canvas.bottom)];
     self.x.path = xAxis.CGPath;
-    [self.canvasLayer addSublayer:self.x];
+    [self.canvas.layer addSublayer:self.x];
 }
 
 - (void)drawYAxis{
     UIBezierPath *yAxis = [[UIBezierPath alloc] init];
-    [yAxis moveToPoint:CGPointMake(0, self.canvasLayer.bottom)];
+    [yAxis moveToPoint:CGPointMake(0, self.canvas.bottom)];
     [yAxis addLineToPoint:CGPointMake(0, 0)];
     self.y.path = yAxis.CGPath;
     //隐藏y轴
-//    [self.canvasLayer addSublayer:self.y];
+//    [self.canvas addSublayer:self.y];
 }
 
 #pragma mark - setter
@@ -100,14 +101,14 @@
 }
 
 - (void)drawXDots{
-    CGFloat interval = self.canvasLayer.right / (self.xDotCount + 1);
+    CGFloat interval = self.canvas.right / (self.xDotCount + 1);
     _xDelta = interval;
     for (NSInteger i = 0; i < self.xDotCount; i++) {
         CAShapeLayer *xDot = [[CAShapeLayer alloc] init];
         xDot.strokeColor = axisColor.CGColor;
         xDot.lineWidth = axisLineWidth;
         
-        CGPoint p = CGPointMake(i * interval, self.canvasLayer.bottom);
+        CGPoint p = CGPointMake(i * interval, self.canvas.bottom);
         [self.xAxisPointsArr addObject:[NSValue valueWithCGPoint:p]];
         
         UIBezierPath *dotPath = [UIBezierPath bezierPath];
@@ -115,12 +116,12 @@
         [dotPath addLineToPoint:CGPointMake(p.x, p.y - 4)];
         xDot.path = dotPath.CGPath;
         
-        [self.canvasLayer addSublayer:xDot];
+        [self.canvas.layer addSublayer:xDot];
     }
 }
 
 - (void)drawYDots{
-    CGFloat interval = self.canvasLayer.height / (self.yDotCount + 1);
+    CGFloat interval = self.canvas.height / (self.yDotCount + 1);
     _yDelta = self.maxY / (self.yDotCount + 1);
     _yScale = (interval / _yDelta) * yScaleSubtle;
     for (NSInteger i = 0; i <= self.yDotCount; i++) {
@@ -129,19 +130,19 @@
         yDot.lineWidth = axisLineWidth;
         
         UIBezierPath *dotPath = [UIBezierPath bezierPath];
-        [dotPath moveToPoint:CGPointMake(0, self.canvasLayer.height - (i * interval))];
-        [dotPath addLineToPoint:CGPointMake(4, self.canvasLayer.height - (i * interval))];
+        [dotPath moveToPoint:CGPointMake(0, self.canvas.height - (i * interval))];
+        [dotPath addLineToPoint:CGPointMake(4, self.canvas.height - (i * interval))];
         yDot.path = dotPath.CGPath;
         
         //隐藏y的点
-//        [self.canvasLayer addSublayer:yDot];
+//        [self.canvas addSublayer:yDot];
     }
 }
 
 - (void)drawXtag{
     for (NSInteger i = 0; i < self.xDotCount; i++) {
         UILabel *tagL = [[UILabel alloc] init];
-        tagL.frame = CGRectMake(i * _xDelta + 15, self.canvasLayer.bottom + 5, 15, 20);
+        tagL.frame = CGRectMake(i * _xDelta + 15, self.canvas.bottom + 5, 15, 20);
         tagL.font = [UIFont systemFontOfSize:11];
         tagL.textColor = [UIColor blackColor];
         NSNumber *xNumber = self.xDotArr[i];
@@ -154,9 +155,13 @@
     @try {
         NSInteger i = 0;
         
+        [self.linesArr enumerateObjectsUsingBlock:^(ApexLine * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        
         for (NSString *key in self.lines) {
             
-            ApexLine *line = [ApexLine apexLineWithPoints:self.lines[key] onLayer:self.canvasLayer xDelta:_xDelta yDelta:_yDelta yScale:_yScale];
+            ApexLine *line = [ApexLine apexLineWithPoints:self.lines[key] onLayer:self.canvas xDelta:_xDelta yDelta:_yDelta yScale:_yScale];
             
             if (line.dots.count > 20) {
                 line.shouldShowYValue = false;
@@ -170,6 +175,8 @@
                 line.lineColor = self.lineColorArr[i];
                 line.dotColor = self.dotColorArr[i];
             }
+            
+            [self.linesArr addObject:line];
             
             i ++;
         }
@@ -197,7 +204,7 @@
                 [path addLineToPoint:dot.dotCenter];
                 
                 dashLineLayer.path = path.CGPath;
-                [self.canvasLayer addSublayer:dashLineLayer];
+                [self.canvas.layer addSublayer:dashLineLayer];
             }];
             
         } @catch (NSException *exception) {
@@ -251,12 +258,12 @@
 }
 
 
-- (CALayer *)canvasLayer{
-    if (!_canvasLayer) {
-        _canvasLayer = [[CALayer alloc] init];
-        _canvasLayer.frame = CGRectMake(20, 0, self.width-30, self.height-20);
+- (UIView *)canvas{
+    if (!_canvas) {
+        _canvas = [[UIView alloc] init];
+        _canvas.frame = CGRectMake(20, 0, self.width-30, self.height-20);
     }
-    return _canvasLayer;
+    return _canvas;
 }
 
 - (CAShapeLayer *)x{
@@ -293,5 +300,12 @@
         _xAxisPointsArr = [NSMutableArray array];
     }
     return _xAxisPointsArr;
+}
+
+- (NSMutableArray<ApexLine *> *)linesArr{
+    if (!_linesArr) {
+        _linesArr = [NSMutableArray array];
+    }
+    return _linesArr;
 }
 @end

@@ -13,14 +13,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ApexLine : CALayer
+@interface ApexLine : UIView
 @property (nonatomic, strong, readonly) NSArray<ApexDot*> *dots; /**<  */
 @property (nonatomic, assign) BOOL shouldShowYValue; /**<  */
 
 @property (nonatomic, strong) UIColor *lineColor; /**<  */
 @property (nonatomic, strong) UIColor *dotColor; /**<  */
 
-+ (instancetype)apexLineWithPoints:(NSArray<ApexPoint *> *)points onLayer:(CALayer *)superLayer xDelta:(CGFloat)xDelta yDelta:(CGFloat)yDelta yScale:(CGFloat)yScale;
++ (instancetype)apexLineWithPoints:(NSArray<ApexPoint *> *)points onLayer:(UIView *)superView xDelta:(CGFloat)xDelta yDelta:(CGFloat)yDelta yScale:(CGFloat)yScale;
 @end
 
 NS_ASSUME_NONNULL_END
