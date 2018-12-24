@@ -15,7 +15,9 @@
 
 #define axisLineWidth 2
 #define axisColor [UIColor grayColor]
-#define yScaleSubtle 0.5  //y轴拉伸的调节
+#define yScaleSubtle 0.7  //y轴拉伸的调节
+#define xScaleSubtle 1  //y轴拉伸的调节
+#define canvasInsetBottom -20
 
 @interface ApexLineChart ()
 @property (nonatomic, strong) NSMutableDictionary<NSString*, NSArray<ApexPoint*>*> *lines; /**<  */
@@ -60,8 +62,8 @@
 
 - (void)drawXAxis{
     UIBezierPath *xAxis = [[UIBezierPath alloc] init];
-    [xAxis moveToPoint:CGPointMake(0, self.canvas.bottom)];
-    [xAxis addLineToPoint:CGPointMake(self.canvas.width, self.canvas.bottom)];
+    [xAxis moveToPoint:CGPointMake(0, self.canvas.bottom + canvasInsetBottom)];
+    [xAxis addLineToPoint:CGPointMake(self.canvas.width, self.canvas.bottom + canvasInsetBottom)];
     self.x.path = xAxis.CGPath;
     [self.canvas.layer addSublayer:self.x];
 }
@@ -101,14 +103,14 @@
 }
 
 - (void)drawXDots{
-    CGFloat interval = self.canvas.right / (self.xDotCount + 1);
+    CGFloat interval = self.canvas.right / (self.xDotCount + 1) * xScaleSubtle;
     _xDelta = interval;
     for (NSInteger i = 0; i < self.xDotCount; i++) {
         CAShapeLayer *xDot = [[CAShapeLayer alloc] init];
         xDot.strokeColor = axisColor.CGColor;
         xDot.lineWidth = axisLineWidth;
         
-        CGPoint p = CGPointMake(i * interval, self.canvas.bottom);
+        CGPoint p = CGPointMake(i * interval, self.canvas.bottom + canvasInsetBottom);
         [self.xAxisPointsArr addObject:[NSValue valueWithCGPoint:p]];
         
         UIBezierPath *dotPath = [UIBezierPath bezierPath];
@@ -121,7 +123,7 @@
 }
 
 - (void)drawYDots{
-    CGFloat interval = self.canvas.height / (self.yDotCount + 1);
+    CGFloat interval = (self.canvas.height + canvasInsetBottom) / (self.yDotCount + 1);
     _yDelta = self.maxY / (self.yDotCount + 1);
     _yScale = (interval / _yDelta) * yScaleSubtle;
     for (NSInteger i = 0; i <= self.yDotCount; i++) {
@@ -142,12 +144,13 @@
 - (void)drawXtag{
     for (NSInteger i = 0; i < self.xDotCount; i++) {
         UILabel *tagL = [[UILabel alloc] init];
-        tagL.frame = CGRectMake(i * _xDelta + 15, self.canvas.bottom + 5, 15, 20);
+        tagL.frame = CGRectMake(i * _xDelta - 7.5, self.canvas.bottom + canvasInsetBottom, 15, 20);
         tagL.font = [UIFont systemFontOfSize:11];
         tagL.textColor = [UIColor blackColor];
+        tagL.textAlignment = NSTextAlignmentCenter;
         NSNumber *xNumber = self.xDotArr[i];
         tagL.text = [NSString stringWithFormat:@"%ld",xNumber.integerValue];
-        [self addSubview:tagL];
+        [self.canvas addSubview:tagL];
     }
 }
 
