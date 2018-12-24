@@ -20,6 +20,7 @@
 		E767E3A721C7440C00FE3428 /* ApexDot.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A621C7440C00FE3428 /* ApexDot.m */; };
 		E767E3AA21C7460D00FE3428 /* ApexLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3A921C7460D00FE3428 /* ApexLine.m */; };
 		E767E3AD21C89BC500FE3428 /* UIColor+ChartColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E3AC21C89BC500FE3428 /* UIColor+ChartColor.m */; };
+		E7C9B22D21D0D3B800C09422 /* ApexDotDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C9B22C21D0D3B800C09422 /* ApexDotDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		E767E3A921C7460D00FE3428 /* ApexLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexLine.m; sourceTree = "<group>"; };
 		E767E3AB21C89BC500FE3428 /* UIColor+ChartColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ChartColor.h"; sourceTree = "<group>"; };
 		E767E3AC21C89BC500FE3428 /* UIColor+ChartColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ChartColor.m"; sourceTree = "<group>"; };
+		E7C9B22B21D0D3B800C09422 /* ApexDotDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexDotDetailView.h; sourceTree = "<group>"; };
+		E7C9B22C21D0D3B800C09422 /* ApexDotDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexDotDetailView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				E767E3A621C7440C00FE3428 /* ApexDot.m */,
 				E767E3A821C7460D00FE3428 /* ApexLine.h */,
 				E767E3A921C7460D00FE3428 /* ApexLine.m */,
+				E7C9B22B21D0D3B800C09422 /* ApexDotDetailView.h */,
+				E7C9B22C21D0D3B800C09422 /* ApexDotDetailView.m */,
 			);
 			path = LineCharts;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				E767E3AA21C7460D00FE3428 /* ApexLine.m in Sources */,
 				E767E39121C3914E00FE3428 /* main.m in Sources */,
 				E767E3A421C739EA00FE3428 /* ApexPoint.m in Sources */,
+				E7C9B22D21D0D3B800C09422 /* ApexDotDetailView.m in Sources */,
 				E767E3A121C3B4D500FE3428 /* CALayer+TKFrame.m in Sources */,
 				E767E39A21C3918300FE3428 /* ApexLineChart.m in Sources */,
 				E767E39E21C39D9400FE3428 /* UIView+TKFrame.m in Sources */,

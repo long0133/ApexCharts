@@ -17,7 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL showXindicatorDashLine; /**<  */
 
-+ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas;
+
+/**
+ 绘制折线图
+ @param view 父view
+ @param datas 点的x,y数据
+ @param detailData 点击点时显示的详细数据 需要d与data一一对应
+ */
++ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas detailData:(NSDictionary<NSString *,NSArray *> *)detailData;
 @end
 
 NS_ASSUME_NONNULL_END

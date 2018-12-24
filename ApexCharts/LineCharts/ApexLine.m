@@ -43,13 +43,12 @@
         CGFloat x = (idx) * self.xDelta;
         CGFloat y = (self.height - ((obj.y) * self.yScale));
     
-        CGFloat originX = obj.x;
         CGFloat originY = obj.y;
         
         obj = [ApexPoint apexPointWithX:x Y:y];
         ApexDot *dot = [ApexDot ApexDotOnPoint:obj type:ApexDotsTypeCircle];
-        dot.originX = originX;
         dot.originy = originY;
+        dot.index = idx;
         [dot setYValue:[NSString stringWithFormat:@"%.1f",originY]];
         
         if (idx == 0) {
@@ -57,6 +56,10 @@
         }else{
             [path addLineToPoint:dot.center];
         }
+        
+        dot.didClickDot = ^(NSInteger index) {
+            //点击点时
+        };
         
         self.lastDot = dot;
         [temp addObject:dot];

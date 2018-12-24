@@ -48,6 +48,9 @@
     self.yLabel.frame = CGRectMake(0, self.height/4, self.width, self.height - dotWidth);
     self.yLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.yLabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapYLabel)];
+    [self.yLabel addGestureRecognizer:tap];
 }
 
 - (void)setYValue:(NSString *)yValue{
@@ -73,6 +76,13 @@
     [self setNeedsDisplay];
 }
 
+#pragma mark - action
+- (void)didTapYLabel{
+    if (self.didClickDot) {
+        self.didClickDot(self.index);
+    }
+}
+
 #pragma mark - getter
 - (CAShapeLayer *)dotLayer{
     if (!_dotLayer) {
@@ -89,6 +99,7 @@
         _yLabel = [[UILabel alloc] init];
         [_yLabel setFont:[UIFont fontWithName:@"Helvetica-BoldOblique" size:11]];
         _yLabel.textColor = labelColor;
+        _yLabel.userInteractionEnabled = true;
         [_yLabel adjustsFontSizeToFitWidth];
     }
     return _yLabel;

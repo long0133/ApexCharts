@@ -19,14 +19,18 @@ typedef NS_ENUM(NSUInteger, ApexDotsType) {
     ApexDotsTypeDot
 };
 
+
 @interface ApexDot : UIView
 @property (nonatomic, assign, readonly) CGFloat x; /**< 在视图中的点的x */
 @property (nonatomic, assign, readonly) CGFloat y; /**< 在视图中的点的y */
-@property (nonatomic, assign) CGFloat originX; /**< 数据中原本的x */
+//@property (nonatomic, assign) CGFloat originX; /**< 数据中原本的x */
 @property (nonatomic, assign) CGFloat originy; /**< 数据中原本的y */
 @property (nonatomic, assign, readonly) CGPoint dotCenter; /**<  */
 @property (nonatomic, assign) BOOL shouldShowYValue; /**<  */
 @property (nonatomic, strong) UIColor *dotColor; /**<  */
+
+@property (nonatomic, assign) NSInteger index; /**<  */
+@property (nonatomic, copy) void (^didClickDot)(NSInteger index);
 
 + (instancetype)ApexDotOnPoint:(ApexPoint*)point type:(ApexDotsType)type;
 - (void)setYValue:(NSString*)yValue;

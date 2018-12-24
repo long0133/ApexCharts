@@ -39,7 +39,7 @@
 
 @implementation ApexLineChart
 
-+ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas{
++ (instancetype)showOnView:(UIView *)view WithDatas:(NSDictionary<NSString *,NSArray *> *)datas detailData:(nonnull NSDictionary<NSString *,NSArray *> *)detailData{
     
     ApexLineChart *lineChart = [[ApexLineChart alloc] initWithFrame:view.bounds];
     [lineChart prepareDatas:datas];
@@ -74,7 +74,7 @@
     [yAxis addLineToPoint:CGPointMake(0, 0)];
     self.y.path = yAxis.CGPath;
     //隐藏y轴
-//    [self.canvas addSublayer:self.y];
+//    [self.canvas.layer addSublayer:self.y];
 }
 
 #pragma mark - setter
@@ -103,7 +103,7 @@
 }
 
 - (void)drawXDots{
-    CGFloat interval = self.canvas.right / (self.xDotCount + 1) * xScaleSubtle;
+    CGFloat interval = self.canvas.right / (self.xDotCount) * xScaleSubtle;
     _xDelta = interval;
     for (NSInteger i = 0; i < self.xDotCount; i++) {
         CAShapeLayer *xDot = [[CAShapeLayer alloc] init];
