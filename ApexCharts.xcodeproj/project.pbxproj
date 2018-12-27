@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58158F3C21D34D310006D413 /* ApexRankListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58158F3B21D34D310006D413 /* ApexRankListCell.m */; };
+		58158F3F21D34DA20006D413 /* ApexPieRankChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 58158F3E21D34DA20006D413 /* ApexPieRankChart.m */; };
+		58158F4421D49E540006D413 /* ApexPieDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58158F4321D49E540006D413 /* ApexPieDetailsView.m */; };
+		58C4A82521D232C600924258 /* ApexPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C4A82421D232C600924258 /* ApexPieChart.m */; };
 		E767E38321C3914D00FE3428 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E38221C3914D00FE3428 /* AppDelegate.m */; };
 		E767E38621C3914D00FE3428 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E767E38521C3914D00FE3428 /* ViewController.m */; };
 		E767E38921C3914D00FE3428 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E767E38721C3914D00FE3428 /* Main.storyboard */; };
@@ -24,6 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		58158F3A21D34D310006D413 /* ApexRankListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexRankListCell.h; sourceTree = "<group>"; };
+		58158F3B21D34D310006D413 /* ApexRankListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexRankListCell.m; sourceTree = "<group>"; };
+		58158F3D21D34DA20006D413 /* ApexPieRankChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexPieRankChart.h; sourceTree = "<group>"; };
+		58158F3E21D34DA20006D413 /* ApexPieRankChart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexPieRankChart.m; sourceTree = "<group>"; };
+		58158F4221D49E540006D413 /* ApexPieDetailsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexPieDetailsView.h; sourceTree = "<group>"; };
+		58158F4321D49E540006D413 /* ApexPieDetailsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexPieDetailsView.m; sourceTree = "<group>"; };
+		58C4A82321D232C600924258 /* ApexPieChart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApexPieChart.h; sourceTree = "<group>"; };
+		58C4A82421D232C600924258 /* ApexPieChart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApexPieChart.m; sourceTree = "<group>"; };
 		E767E37E21C3914D00FE3428 /* ApexCharts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApexCharts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E767E38121C3914D00FE3428 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E767E38221C3914D00FE3428 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,6 +75,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58C4A82221D213FB00924258 /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				58158F3D21D34DA20006D413 /* ApexPieRankChart.h */,
+				58158F3E21D34DA20006D413 /* ApexPieRankChart.m */,
+				58C4A82321D232C600924258 /* ApexPieChart.h */,
+				58C4A82421D232C600924258 /* ApexPieChart.m */,
+				58158F3A21D34D310006D413 /* ApexRankListCell.h */,
+				58158F3B21D34D310006D413 /* ApexRankListCell.m */,
+				58158F4221D49E540006D413 /* ApexPieDetailsView.h */,
+				58158F4321D49E540006D413 /* ApexPieDetailsView.m */,
+			);
+			path = PieChart;
+			sourceTree = "<group>";
+		};
 		E767E37521C3914D00FE3428 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +111,7 @@
 			children = (
 				E767E39B21C39D6300FE3428 /* Util */,
 				E767E39721C3915600FE3428 /* LineCharts */,
+				58C4A82221D213FB00924258 /* PieChart */,
 				E767E38121C3914D00FE3428 /* AppDelegate.h */,
 				E767E38221C3914D00FE3428 /* AppDelegate.m */,
 				E767E38421C3914D00FE3428 /* ViewController.h */,
@@ -197,17 +225,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58158F4421D49E540006D413 /* ApexPieDetailsView.m in Sources */,
 				E767E3AD21C89BC500FE3428 /* UIColor+ChartColor.m in Sources */,
+				58158F3C21D34D310006D413 /* ApexRankListCell.m in Sources */,
 				E767E38621C3914D00FE3428 /* ViewController.m in Sources */,
 				E767E3A721C7440C00FE3428 /* ApexDot.m in Sources */,
 				E767E3AA21C7460D00FE3428 /* ApexLine.m in Sources */,
 				E767E39121C3914E00FE3428 /* main.m in Sources */,
 				E767E3A421C739EA00FE3428 /* ApexPoint.m in Sources */,
 				E7C9B22D21D0D3B800C09422 /* ApexDotDetailView.m in Sources */,
+				58158F3F21D34DA20006D413 /* ApexPieRankChart.m in Sources */,
 				E767E3A121C3B4D500FE3428 /* CALayer+TKFrame.m in Sources */,
 				E767E39A21C3918300FE3428 /* ApexLineChart.m in Sources */,
 				E767E39E21C39D9400FE3428 /* UIView+TKFrame.m in Sources */,
 				E767E38321C3914D00FE3428 /* AppDelegate.m in Sources */,
+				58C4A82521D232C600924258 /* ApexPieChart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +384,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WU6NZ66PC;
 				INFOPLIST_FILE = ApexCharts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -369,6 +402,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2WU6NZ66PC;
 				INFOPLIST_FILE = ApexCharts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

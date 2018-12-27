@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "ApexLineChart.h"
 #import "UIColor+ChartColor.h"
+#import "ApexPieRankChart.h"
+
+#define kPieRandColor [UIColor colorWithRed:arc4random() % 255 / 255.0f green:arc4random() % 255 / 255.0f blue:arc4random() % 255 / 255.0f alpha:1.0f]
 
 @interface ViewController ()
 
@@ -32,6 +35,13 @@
     lineChart.dotColorArr = @[UIColorHex(1c4ba0),UIColorHex(26a646)];
     lineChart.showXindicatorDashLine = YES;
     
+    
+    NSArray *datas = @[@1000,@888,@666,@333];
+    NSArray *dataTitles = @[@"事件元素1",@"事件元素2",@"事件元素3",@"事件元素4"];
+    NSArray *colors = @[kPieRandColor,kPieRandColor,kPieRandColor,kPieRandColor];
+
+    ApexPieRankChart *pieRankChart = [[ApexPieRankChart alloc]initWithFrame:self.view.bounds withDatas:datas withDatasTitle:dataTitles withColors:colors];
+    [self.view addSubview:pieRankChart];
 }
 
 
